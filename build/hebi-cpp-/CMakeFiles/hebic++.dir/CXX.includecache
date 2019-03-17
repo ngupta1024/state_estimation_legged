@@ -1,0 +1,10 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/hebi-cpp-/hebic++_automoc.cpp
+
