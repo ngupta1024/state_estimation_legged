@@ -109,7 +109,7 @@ private:
   hebi::GroupCommand cmd_;
   Eigen::VectorXd positions_;
   std::mutex fbk_lock_;
-  std::vector<std::unique_ptr<Leg> > legs_;
+  std::vector<std::unique_ptr<Leg>> legs_;
 
   std::chrono::time_point<std::chrono::steady_clock> pose_start_time_;
   double pose_last_time_;
@@ -132,7 +132,6 @@ private:
 
   //--------------------Estimator------------------
   std::chrono::time_point<std::chrono::steady_clock> curr_fbk;
-  std::chrono::duration<double, std::ratio<1>> fbk_dt;
   
   Matt6* matt6;
   EKF* filter;

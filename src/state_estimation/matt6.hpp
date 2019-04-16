@@ -3,42 +3,48 @@
 #include "est_utils.hpp"
 #include <Eigen/Dense>
 #include <vector>
-using namespace Eigen;
-using namespace std;
-using namespace hebi;
+// using namespace Eigen;
+// using namespace std;
+// using namespace hebi;
 
-namespace hebi{
-
+// base -> shoulder -> knee
 struct Matt6FbkLeg 
 {
-    // base -> shoulder -> knee
-    Vector3d joint_ang;
-    Vector3d joint_vel;
-    Vector3d joint_tau;
+    Eigen::Vector3d joint_ang;
+    Eigen::Vector3d joint_vel;
+    Eigen::Vector3d joint_tau;
 };
 
 // frame convention:  w: world frame, b: body frame, s: sensor frame
 struct Matt6IMU 
 {
-    Vector3d acc_s;   // in sensor frame 
-    Vector3d acc_b;     // in body frame 
-    Vector3d gyro_s;
-    Vector3d gyro_b;
+    // acceleration in sensor frame
+    Eigen::Vector3d acc_s;
+    // acceleration in body frame     
+    Eigen::Vector3d acc_b;  
+    // angular velocity in sensor frame   
+    Eigen::Vector3d gyro_s;
+    // angular velocity in body frame
+    Eigen::Vector3d gyro_b;
 };
 
 class Matt6
 {
+    //public variables
     public:
-
-        static const int state_dim=34;//(pos)3+(vel)3+(quat)4+(feet_pos)18+(bias_acc)3+(bias_gyro)3;
-        static const int measure_dim=18;//(feet_pos)
+        //(pos)3+(vel)3+(quat)4+(feet_pos)18+(bias_acc)3+(bias_gyro)3;
+        static const int state_dim=34;
+        //(feet_pos)
+        static const int measure_dim=18;
         //ekf specific
-        typedef Matrix<float,state_dim,state_dim> covMatrixEKF;
-        typedef Matrix<float,state_dim,1> stateVecEKF;
-        typedef Matrix<float,measure_dim,1> measureStateEKF;
+        typedef Matrix<double,state_dim-1,state_dim-1> covMatrixEKF;
+        typedef Matrix<double,state_dim,1> stateVecEKF;
+        typedef Matrix<double,measure_dim,1> measureStateEKF;
 
         std::vector<Matt6FbkLeg> fbk_legs;
         std::vector<Matt6IMU> fbk_imus;
+
+    //public functions
     public:
         //constructor
         Matt6();
@@ -52,5 +58,3 @@ class Matt6
         void measurementDynamics(const Matt6::stateVecEKF& predicted_state, Matt6::measureStateEKF& measurement_state);
 
 };//class Matt6
-
-}//namespace hebi

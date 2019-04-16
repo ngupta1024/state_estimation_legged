@@ -541,7 +541,7 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
 
       std::lock_guard<std::mutex> guard(fbk_lock_);
       curr_fbk = std::chrono::steady_clock::now();
-      fbk_dt = curr_fbk - last_fbk;
+      filter->fbk_dt = curr_fbk - last_fbk;
       curr_fbk=last_fbk;
       assert(fbk.size() == Leg::getNumJoints() * real_legs_.size());
 
@@ -567,6 +567,7 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
         Vector3d distance_bs = base_frame.topRightCorner<3,1>();
 
         matt6->fbk_imus[i].gyro_b = rotation_bs*matt6->fbk_imus[i].gyro_s;
+        // //verified by Shuo - I am still not sure where it came from
         matt6->fbk_imus[i].acc_b = rotation_bs * matt6->fbk_imus[i].acc_s - 
                                     matt6->fbk_imus[i].gyro_b.cross(matt6->fbk_imus[i].gyro_b.cross(distance_bs));
                                       // rigid body dynamics, check wiki
@@ -584,50 +585,60 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
       average_gyro /= num_legs_;
       //when the robot is idle, it reads 9.86 (around 0.06 bias in z direction)
       // cout<<"average acceleration in Z:"<<average_acc[2]<<endl;
-      
-      //get imu bias
+
+      //get the transformation matrix from base(not sure?) to end effector
+      std::vector<Matrix4d> feet_pose_vec;
+      for(int i=0;i<num_legs_;++i)
+      {
+        Matrix4d end_point_frame;
+        Eigen::Vector3d curr_angles;
+        curr_angles<<fbk[i * num_leg_joints].actuator().position().get(),
+                                      fbk[i * num_leg_joints + 1].actuator().position().get(),
+                                      fbk[i * num_leg_joints + 2].actuator().position().get();
+        legs_[i]->getKinematics().getEndEffector(curr_angles,end_point_frame);
+        feet_pose_vec.push_back(end_point_frame);
+      }
+
+
+      // get imu bias - should be called just once
+      bool updated=false;
       // when it is still, just record average acc and average ang vel - that is the bias
       if (!isStepping() && !filter->estimator_init())
       { 
-        Vector3d acc_bias(3);
-        acc_bias<<average_acc[0],average_acc[1],average_acc[2]-9.8;
-        filter->acc_bias_list.push_back(acc_bias);
-        filter->gyro_bias_list.push_back(average_gyro);
+        filter->acc_bias_list={average_acc[0],average_acc[1],average_acc[2]-9.8};
+        filter->gyro_bias_list={average_gyro[0],average_gyro[1],average_gyro[2]};
         filter->bias_recorded=true;
         std::cout<<"bias recorded"<<std::endl; 
         //assume first prior to be zero position; zero vel; zero orientation [1 0 0 0];feet_positions;bias (if bias recorded)
-        filter->curr_state.fill(0);
-        filter->curr_state.segment<6>(0)<<0,0,0,0,0,0;
-        filter->curr_state.segment<4>(6)<<1,0,0,0;
-        filter->curr_state.segment<18>(10)<<0,0,0,0,0,0,
-                                              0,0,0,0,0,0,
-                                              0,0,0,0,0,0;
-        filter->curr_state.segment<3>(28)<<filter->acc_bias_list[0](0),filter->acc_bias_list[0](1),filter->acc_bias_list[0](2);
-        filter->curr_state.segment<3>(31)<<filter->gyro_bias_list[0](0),filter->gyro_bias_list[0](1),filter->gyro_bias_list[0](2);
+        updated=filter->updateCurrState(feet_pose_vec);
       }
+
+      //set noises by collecting data, for now just hard set them
       
       //using some prior, predict a posterior using acceleration and angular velocity of the body in the body frame
-      
-      //linearize the process dynamics (F), measurement dynamics (H)
-      //linearize the processs noise dynamics (Q) and measurement noise dynamics (R)
-      //update
-      //update using the actuator readings (just angles); I wonder what all we can do with velocity and torques
-      //int num_leg_joints = Leg::getNumJoints();
-      for (int i = 0; i< num_legs_; i++)
+      if (updated)
       {
-        matt6->fbk_legs[i].joint_ang(0) = fbk[i * num_leg_joints].actuator().position().get();
-        matt6->fbk_legs[i].joint_ang(1) = fbk[i * num_leg_joints + 1].actuator().position().get();
-        matt6->fbk_legs[i].joint_ang(2) = fbk[i * num_leg_joints + 2].actuator().position().get();
-        matt6->fbk_legs[i].joint_vel(0) = fbk[i * num_leg_joints].actuator().velocity().get();
-        matt6->fbk_legs[i].joint_vel(1) = fbk[i * num_leg_joints + 1].actuator().velocity().get();
-        matt6->fbk_legs[i].joint_vel(2) = fbk[i * num_leg_joints + 2].actuator().velocity().get();
-        matt6->fbk_legs[i].joint_tau(0) = fbk[i * num_leg_joints].actuator().effort().get();
-        matt6->fbk_legs[i].joint_tau(1) = fbk[i * num_leg_joints + 1].actuator().effort().get();
-        matt6->fbk_legs[i].joint_tau(2) = fbk[i * num_leg_joints + 2].actuator().effort().get();
+        filter->predict(average_acc, average_gyro, matt6->fbk_imus);
+        filter->update(feet_pos_vec);
       }
-      //do forward kinematics to estimate the feet position
+      
+      //update using the actuator readings (just angles); I wonder what all we can do with velocity and torques
+      
+      // for (int i = 0; i< num_legs_; i++)
+      // {
+      //   matt6->fbk_legs[i].joint_ang(0) = fbk[i * num_leg_joints].actuator().position().get();
+      //   matt6->fbk_legs[i].joint_ang(1) = fbk[i * num_leg_joints + 1].actuator().position().get();
+      //   matt6->fbk_legs[i].joint_ang(2) = fbk[i * num_leg_joints + 2].actuator().position().get();
+      //   matt6->fbk_legs[i].joint_vel(0) = fbk[i * num_leg_joints].actuator().velocity().get();
+      //   matt6->fbk_legs[i].joint_vel(1) = fbk[i * num_leg_joints + 1].actuator().velocity().get();
+      //   matt6->fbk_legs[i].joint_vel(2) = fbk[i * num_leg_joints + 2].actuator().velocity().get();
+      //   matt6->fbk_legs[i].joint_tau(0) = fbk[i * num_leg_joints].actuator().effort().get();
+      //   matt6->fbk_legs[i].joint_tau(1) = fbk[i * num_leg_joints + 1].actuator().effort().get();
+      //   matt6->fbk_legs[i].joint_tau(2) = fbk[i * num_leg_joints + 2].actuator().effort().get();
+      // }
 
       //you will have to calculate the jacobian in the body frame or in the world frame(?)
+      // to calculate the forces applied on the end effector
 
       /*--------------------------------------------estimator end---------------------------------------------------------*/
 
