@@ -1619,8 +1619,8 @@ set
 -
 chrono
 -
-../state_estimation/matt6.hpp
-/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.hpp
+../state_estimation/Matt6Estimator.hpp
+/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.hpp
 ../state_estimation/EKF.hpp
 /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/EKF.hpp
 
@@ -1679,8 +1679,22 @@ cmath
 -
 eigen3/Eigen/Dense
 -
-matt6.hpp
-/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.hpp
+Matt6Estimator.hpp
+/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.hpp
+vector
+-
+chrono
+-
+
+/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.cpp
+Matt6Estimator.hpp
+/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.hpp
+
+/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.hpp
+est_utils.hpp
+/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/est_utils.hpp
+Eigen/Dense
+-
 vector
 -
 chrono
@@ -1694,17 +1708,5 @@ cmath
 
 /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/est_utils.hpp
 Eigen/Dense
--
-
-/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.cpp
-matt6.hpp
-/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.hpp
-
-/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.hpp
-est_utils.hpp
-/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/est_utils.hpp
-Eigen/Dense
--
-vector
 -
 

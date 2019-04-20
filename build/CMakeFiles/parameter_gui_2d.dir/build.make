@@ -266,7 +266,7 @@ parameter_gui_2d_EXTERNAL_OBJECTS = \
 "/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/src/robot/hexapod.cpp.o" \
 "/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/src/robot/step.cpp.o" \
 "/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o" \
-"/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o" \
+"/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o" \
 "/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/src/state_estimation/est_utils.cpp.o" \
 "/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/src/robot/hexapod_parameters.cpp.o" \
 "/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles/hexapod_core.dir/hexapod_core_automoc.cpp.o"
@@ -283,7 +283,7 @@ parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/robot/leg.cpp.o
 parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/robot/hexapod.cpp.o
 parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/robot/step.cpp.o
 parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o
-parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o
+parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o
 parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/state_estimation/est_utils.cpp.o
 parameter_gui_2d: CMakeFiles/hexapod_core.dir/src/robot/hexapod_parameters.cpp.o
 parameter_gui_2d: CMakeFiles/hexapod_core.dir/hexapod_core_automoc.cpp.o

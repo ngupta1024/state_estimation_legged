@@ -1175,8 +1175,8 @@ CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.
 CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: ../src/robot/leg.hpp
 CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: ../src/robot/step.hpp
 CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: ../src/state_estimation/EKF.hpp
+CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: ../src/state_estimation/Matt6Estimator.hpp
 CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: ../src/state_estimation/est_utils.hpp
-CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: ../src/state_estimation/matt6.hpp
 CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: /home/namang/anaconda3/include/qt/QtCore/QEvent
 CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: /home/namang/anaconda3/include/qt/QtCore/QObject
 CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.o: /home/namang/anaconda3/include/qt/QtCore/qalgorithms.h

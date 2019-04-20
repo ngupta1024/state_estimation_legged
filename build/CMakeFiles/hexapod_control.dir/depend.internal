@@ -1092,8 +1092,8 @@ CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o
  /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/robot/leg.hpp
  /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/robot/step.hpp
  /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/EKF.hpp
+ /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.hpp
  /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/est_utils.hpp
- /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.hpp
 CMakeFiles/hexapod_control.dir/src/input/input_manager_mobile_io.cpp.o
  ../src/xml_util/pugiconfig.hpp
  ../src/xml_util/pugixml.hpp

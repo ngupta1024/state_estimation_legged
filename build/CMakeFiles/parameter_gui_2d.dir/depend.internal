@@ -1176,8 +1176,8 @@ CMakeFiles/parameter_gui_2d.dir/src/param_display/hexapod_parameter_view_2d.cpp.
  ../src/robot/leg.hpp
  ../src/robot/step.hpp
  ../src/state_estimation/EKF.hpp
+ ../src/state_estimation/Matt6Estimator.hpp
  ../src/state_estimation/est_utils.hpp
- ../src/state_estimation/matt6.hpp
  /home/namang/anaconda3/include/qt/QtCore/QEvent
  /home/namang/anaconda3/include/qt/QtCore/QObject
  /home/namang/anaconda3/include/qt/QtCore/qalgorithms.h

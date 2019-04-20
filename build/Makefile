@@ -733,6 +733,33 @@ src/state_estimation/EKF.cpp.s:
 	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.s
 .PHONY : src/state_estimation/EKF.cpp.s
 
+src/state_estimation/Matt6Estimator.o: src/state_estimation/Matt6Estimator.cpp.o
+
+.PHONY : src/state_estimation/Matt6Estimator.o
+
+# target to build an object file
+src/state_estimation/Matt6Estimator.cpp.o:
+	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o
+.PHONY : src/state_estimation/Matt6Estimator.cpp.o
+
+src/state_estimation/Matt6Estimator.i: src/state_estimation/Matt6Estimator.cpp.i
+
+.PHONY : src/state_estimation/Matt6Estimator.i
+
+# target to preprocess a source file
+src/state_estimation/Matt6Estimator.cpp.i:
+	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.i
+.PHONY : src/state_estimation/Matt6Estimator.cpp.i
+
+src/state_estimation/Matt6Estimator.s: src/state_estimation/Matt6Estimator.cpp.s
+
+.PHONY : src/state_estimation/Matt6Estimator.s
+
+# target to generate assembly for a file
+src/state_estimation/Matt6Estimator.cpp.s:
+	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.s
+.PHONY : src/state_estimation/Matt6Estimator.cpp.s
+
 src/state_estimation/est_utils.o: src/state_estimation/est_utils.cpp.o
 
 .PHONY : src/state_estimation/est_utils.o
@@ -759,33 +786,6 @@ src/state_estimation/est_utils.s: src/state_estimation/est_utils.cpp.s
 src/state_estimation/est_utils.cpp.s:
 	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/est_utils.cpp.s
 .PHONY : src/state_estimation/est_utils.cpp.s
-
-src/state_estimation/matt6.o: src/state_estimation/matt6.cpp.o
-
-.PHONY : src/state_estimation/matt6.o
-
-# target to build an object file
-src/state_estimation/matt6.cpp.o:
-	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o
-.PHONY : src/state_estimation/matt6.cpp.o
-
-src/state_estimation/matt6.i: src/state_estimation/matt6.cpp.i
-
-.PHONY : src/state_estimation/matt6.i
-
-# target to preprocess a source file
-src/state_estimation/matt6.cpp.i:
-	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.i
-.PHONY : src/state_estimation/matt6.cpp.i
-
-src/state_estimation/matt6.s: src/state_estimation/matt6.cpp.s
-
-.PHONY : src/state_estimation/matt6.s
-
-# target to generate assembly for a file
-src/state_estimation/matt6.cpp.s:
-	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.s
-.PHONY : src/state_estimation/matt6.cpp.s
 
 src/xml_util/pugixml.o: src/xml_util/pugixml.cpp.o
 
@@ -923,12 +923,12 @@ help:
 	@echo "... src/state_estimation/EKF.o"
 	@echo "... src/state_estimation/EKF.i"
 	@echo "... src/state_estimation/EKF.s"
+	@echo "... src/state_estimation/Matt6Estimator.o"
+	@echo "... src/state_estimation/Matt6Estimator.i"
+	@echo "... src/state_estimation/Matt6Estimator.s"
 	@echo "... src/state_estimation/est_utils.o"
 	@echo "... src/state_estimation/est_utils.i"
 	@echo "... src/state_estimation/est_utils.s"
-	@echo "... src/state_estimation/matt6.o"
-	@echo "... src/state_estimation/matt6.i"
-	@echo "... src/state_estimation/matt6.s"
 	@echo "... src/xml_util/pugixml.o"
 	@echo "... src/xml_util/pugixml.i"
 	@echo "... src/xml_util/pugixml.s"

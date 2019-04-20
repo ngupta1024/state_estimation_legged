@@ -7,7 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/hexapod_core.dir/src/robot/hexapod.cpp.o"
   "CMakeFiles/hexapod_core.dir/src/robot/step.cpp.o"
   "CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o"
-  "CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o"
+  "CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o"
   "CMakeFiles/hexapod_core.dir/src/state_estimation/est_utils.cpp.o"
   "CMakeFiles/hexapod_core.dir/src/robot/hexapod_parameters.cpp.o"
   "CMakeFiles/hexapod_core.dir/hexapod_core_automoc.cpp.o"

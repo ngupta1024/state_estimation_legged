@@ -1091,8 +1091,8 @@ CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o: ../src/robot/hexapod_p
 CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o: ../src/robot/leg.hpp
 CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o: ../src/robot/step.hpp
 CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o: ../src/state_estimation/EKF.hpp
+CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o: ../src/state_estimation/Matt6Estimator.hpp
 CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o: ../src/state_estimation/est_utils.hpp
-CMakeFiles/hexapod_control.dir/src/hexapod_control.cpp.o: ../src/state_estimation/matt6.hpp
 
 CMakeFiles/hexapod_control.dir/src/input/input_manager_mobile_io.cpp.o: ../src/xml_util/pugiconfig.hpp
 CMakeFiles/hexapod_control.dir/src/input/input_manager_mobile_io.cpp.o: ../src/xml_util/pugixml.hpp

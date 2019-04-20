@@ -153,28 +153,28 @@ CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o.provides: CMakeFiles/
 CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o.provides.build: CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o
 
 
-CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o: CMakeFiles/hexapod_core.dir/flags.make
-CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o: ../src/state_estimation/matt6.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o -c /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.cpp
+CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o: CMakeFiles/hexapod_core.dir/flags.make
+CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o: ../src/state_estimation/Matt6Estimator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o -c /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.cpp
 
-CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.cpp > CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.i
+CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.cpp > CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.i
 
-CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/matt6.cpp -o CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.s
+CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/namang/cpp_ws/src/hebi-cpp-examples/kits/daisy_naman/src/state_estimation/Matt6Estimator.cpp -o CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.s
 
-CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.requires:
+CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.requires:
 
-.PHONY : CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.requires
+.PHONY : CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.requires
 
-CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.provides: CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.requires
-	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.provides.build
-.PHONY : CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.provides
+CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.provides: CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.requires
+	$(MAKE) -f CMakeFiles/hexapod_core.dir/build.make CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.provides.build
+.PHONY : CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.provides
 
-CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.provides.build: CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o
+CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.provides.build: CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o
 
 
 CMakeFiles/hexapod_core.dir/src/state_estimation/est_utils.cpp.o: CMakeFiles/hexapod_core.dir/flags.make
@@ -253,7 +253,7 @@ hexapod_core: CMakeFiles/hexapod_core.dir/src/robot/leg.cpp.o
 hexapod_core: CMakeFiles/hexapod_core.dir/src/robot/hexapod.cpp.o
 hexapod_core: CMakeFiles/hexapod_core.dir/src/robot/step.cpp.o
 hexapod_core: CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o
-hexapod_core: CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o
+hexapod_core: CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o
 hexapod_core: CMakeFiles/hexapod_core.dir/src/state_estimation/est_utils.cpp.o
 hexapod_core: CMakeFiles/hexapod_core.dir/src/robot/hexapod_parameters.cpp.o
 hexapod_core: CMakeFiles/hexapod_core.dir/hexapod_core_automoc.cpp.o
@@ -270,7 +270,7 @@ CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/robot/leg.
 CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/robot/hexapod.cpp.o.requires
 CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/robot/step.cpp.o.requires
 CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/state_estimation/EKF.cpp.o.requires
-CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/state_estimation/matt6.cpp.o.requires
+CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/state_estimation/Matt6Estimator.cpp.o.requires
 CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/state_estimation/est_utils.cpp.o.requires
 CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/src/robot/hexapod_parameters.cpp.o.requires
 CMakeFiles/hexapod_core.dir/requires: CMakeFiles/hexapod_core.dir/hexapod_core_automoc.cpp.o.requires
