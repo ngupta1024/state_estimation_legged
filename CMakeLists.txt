@@ -46,7 +46,7 @@ add_library(hexapod_core OBJECT
   ${CMAKE_CURRENT_SOURCE_DIR}/src/robot/step.cpp
 
   ${CMAKE_CURRENT_SOURCE_DIR}/src/state_estimation/EKF.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/state_estimation/matt6.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/state_estimation/Matt6Estimator.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/state_estimation/est_utils.cpp
 
   ${CMAKE_CURRENT_SOURCE_DIR}/src/robot/hexapod_parameters.cpp

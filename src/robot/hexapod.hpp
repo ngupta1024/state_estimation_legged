@@ -10,7 +10,7 @@
 #include <memory>
 #include <set>
 #include <chrono>
-#include "../state_estimation/matt6.hpp"
+#include "../state_estimation/Matt6Estimator.hpp"
 #include "../state_estimation/EKF.hpp"
 // Leg Numbering / Chassis Coordinate convention
 // This should match ROS wheeled vehicle convention
@@ -132,9 +132,8 @@ private:
 
   //--------------------Estimator------------------
   std::chrono::time_point<std::chrono::steady_clock> curr_fbk;
-  
-  Matt6* matt6;
-  EKF* filter;
+  bool updated;
+  std::unique_ptr<EKF> filter;
 
   
   //------------Estimator end----------------------

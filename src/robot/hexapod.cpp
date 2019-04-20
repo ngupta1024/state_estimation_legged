@@ -514,17 +514,17 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
   // Default to straight down w/ a level chassis
   gravity_direction_ = -Eigen::Vector3d::UnitZ();
 
-  // init robot and estimator
-  matt6=new Matt6();
-  filter=new EKF();
-
+  // init estimator
+  std::unique_ptr<EKF> filter_(new EKF());
+  filter=std::move(filter_);
+  updated=false;
   last_fbk = std::chrono::steady_clock::now();
   curr_fbk = std::chrono::steady_clock::now();
-  // init fbk structures
+  // // init fbk structures
   for (int i = 0; i< num_legs_; i++)
   {
-    matt6->fbk_legs.push_back(Matt6FbkLeg());
-    matt6->fbk_imus.push_back(Matt6IMU());
+    filter->fbk_legs.push_back(Matt6Estimator::Matt6FbkLeg());
+    filter->fbk_imus.push_back(Matt6Estimator::Matt6IMU());
   }
 
   last_fbk = std::chrono::steady_clock::now();
@@ -551,25 +551,24 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
       int num_leg_joints = Leg::getNumJoints();
 
       /*--------------------------------------------------estimator begin---------------------------------------------*/
-      //prediction
       //get imu measurements
       for (int i = 0; i< num_legs_; i++)
       {
         //acc and angular vel in the sensor frame at base
         hebi::Vector3f tmp = fbk[i * num_leg_joints].imu().accelerometer().get();
-        matt6->fbk_imus[i].acc_s = Eigen::Vector3d(tmp.getX(), tmp.getY(), tmp.getZ());
+        filter->fbk_imus[i].acc_s = Eigen::Vector3d(tmp.getX(), tmp.getY(), tmp.getZ());
         tmp = fbk[i * num_leg_joints].imu().gyro().get();
-        matt6->fbk_imus[i].gyro_s = Eigen::Vector3d(tmp.getX(), tmp.getY(), tmp.getZ());
+        filter->fbk_imus[i].gyro_s = Eigen::Vector3d(tmp.getX(), tmp.getY(), tmp.getZ());
         
         //convert to body frame
         auto base_frame = legs_[i] -> getKinematics().getBaseFrame();
         Matrix3d rotation_bs = base_frame.topLeftCorner<3,3>();
         Vector3d distance_bs = base_frame.topRightCorner<3,1>();
 
-        matt6->fbk_imus[i].gyro_b = rotation_bs*matt6->fbk_imus[i].gyro_s;
+        filter->fbk_imus[i].gyro_b = rotation_bs*filter->fbk_imus[i].gyro_s;
         // //verified by Shuo - I am still not sure where it came from
-        matt6->fbk_imus[i].acc_b = rotation_bs * matt6->fbk_imus[i].acc_s - 
-                                    matt6->fbk_imus[i].gyro_b.cross(matt6->fbk_imus[i].gyro_b.cross(distance_bs));
+        filter->fbk_imus[i].acc_b = rotation_bs * filter->fbk_imus[i].acc_s - 
+                                    filter->fbk_imus[i].gyro_b.cross(filter->fbk_imus[i].gyro_b.cross(distance_bs));
                                       // rigid body dynamics, check wiki
       }
       
@@ -578,8 +577,8 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
       Vector3d average_gyro(3); average_gyro << 0,0,0;
       for (int i = 0; i< num_legs_; i++)
       {
-        average_acc += matt6->fbk_imus[i].acc_b;
-        average_gyro += matt6->fbk_imus[i].gyro_b;
+        average_acc += filter->fbk_imus[i].acc_b;
+        average_gyro += filter->fbk_imus[i].gyro_b;
       }
       average_acc /= num_legs_;
       average_gyro /= num_legs_;
@@ -588,6 +587,7 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
 
       //get the transformation matrix from base(not sure?) to end effector
       std::vector<Matrix4d> feet_pose_vec;
+      std::vector<MatrixXd> jac_vec; 
       for(int i=0;i<num_legs_;++i)
       {
         Matrix4d end_point_frame;
@@ -597,11 +597,17 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
                                       fbk[i * num_leg_joints + 2].actuator().position().get();
         legs_[i]->getKinematics().getEndEffector(curr_angles,end_point_frame);
         feet_pose_vec.push_back(end_point_frame);
+
+        //you will have to calculate the jacobian in the body frame or in the world frame(?)
+        Eigen::MatrixXd jac_ee;
+        hebi::robot_model::MatrixXdVector jac_com;
+        legs_[i]->computeJacobians(curr_angles, jac_ee, jac_com);
+        jac_vec.push_back(jac_ee);
       }
 
 
       // get imu bias - should be called just once
-      bool updated=false;
+      
       // when it is still, just record average acc and average ang vel - that is the bias
       if (!isStepping() && !filter->estimator_init())
       { 
@@ -612,33 +618,13 @@ Hexapod::Hexapod(std::shared_ptr<Group> group,
         //assume first prior to be zero position; zero vel; zero orientation [1 0 0 0];feet_positions;bias (if bias recorded)
         updated=filter->updateCurrState(feet_pose_vec);
       }
-
-      //set noises by collecting data, for now just hard set them
       
       //using some prior, predict a posterior using acceleration and angular velocity of the body in the body frame
       if (updated)
       {
-        filter->predict(average_acc, average_gyro, matt6->fbk_imus);
-        filter->update(feet_pos_vec);
+        filter->predict(average_acc, average_gyro);
+        updated=filter->update(feet_pose_vec, jac_vec);
       }
-      
-      //update using the actuator readings (just angles); I wonder what all we can do with velocity and torques
-      
-      // for (int i = 0; i< num_legs_; i++)
-      // {
-      //   matt6->fbk_legs[i].joint_ang(0) = fbk[i * num_leg_joints].actuator().position().get();
-      //   matt6->fbk_legs[i].joint_ang(1) = fbk[i * num_leg_joints + 1].actuator().position().get();
-      //   matt6->fbk_legs[i].joint_ang(2) = fbk[i * num_leg_joints + 2].actuator().position().get();
-      //   matt6->fbk_legs[i].joint_vel(0) = fbk[i * num_leg_joints].actuator().velocity().get();
-      //   matt6->fbk_legs[i].joint_vel(1) = fbk[i * num_leg_joints + 1].actuator().velocity().get();
-      //   matt6->fbk_legs[i].joint_vel(2) = fbk[i * num_leg_joints + 2].actuator().velocity().get();
-      //   matt6->fbk_legs[i].joint_tau(0) = fbk[i * num_leg_joints].actuator().effort().get();
-      //   matt6->fbk_legs[i].joint_tau(1) = fbk[i * num_leg_joints + 1].actuator().effort().get();
-      //   matt6->fbk_legs[i].joint_tau(2) = fbk[i * num_leg_joints + 2].actuator().effort().get();
-      // }
-
-      //you will have to calculate the jacobian in the body frame or in the world frame(?)
-      // to calculate the forces applied on the end effector
 
       /*--------------------------------------------estimator end---------------------------------------------------------*/
 

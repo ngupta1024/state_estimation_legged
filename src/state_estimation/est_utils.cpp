@@ -97,5 +97,10 @@ Matrix3d utils::rodrigues(Vector3d axis, double ang, int subscript)
 
 Quaterniond utils::axang2quat(Vector3d angle_axis)
 {
-
+    double angle=angle_axis.norm();
+    Vector3d axis=angle_axis/angle;
+    Vector3d q_xyz=sin(angle/2)*axis;
+    double q_w=cos(angle/2);
+    Quaterniond q(q_w,q_xyz(0), q_xyz(1), q_xyz(2));
+    return q;
 }
